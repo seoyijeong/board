@@ -32,7 +32,11 @@ public class Board {
     private String boardCat;
 
     @Column(nullable = false)
-    private String id;
+    private String userId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="userId")
+    private User user;
 
     @Column(nullable = false, length = 50)
     private String username;
