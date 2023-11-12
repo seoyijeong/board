@@ -1,0 +1,103 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/inc/header::headerFragment"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+        integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+<!-- language pack -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+        integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css">
+
+
+<div class="container shadow-sm w-50 p-5 rounded h-75" style="margin-top: 200px; margin-bottom: 100px">
+    <h2 class="d-block ms-5">게시글 작성</h2>
+    <form class="form-write" method="post" onsubmit="return submitChk()">
+        <input type="hidden" id="boardCat" name="boardCat" th:value="${cat}">
+
+        <div class="form-group m-5">
+            <div>
+                <b class="d-block mb-2">제목</b>
+                <input type="text" class="form-control" name="id" id="id" required>
+            </div>
+        </div>
+
+
+
+        <div class="form-group m-5">
+            <div>
+
+                <textarea class="textContent" id="textContent" name="textContent" onchange="keyCount(this)" style="width:750px; height:300px;"></textarea>
+            </div>
+            <div class="textContentTracer ms-auto" name="textContentTracer" id="textContentTracer">최대 2000자</div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="reset" class="btn btn-warning btn-lg my-5">취소</button>
+            <button id="btn-save" class="btn btn-success btn-lg m-5">저장</button>
+        </div>
+    </form>
+
+
+</div>
+<script src="/js/board.js"></script>
+<script>
+    function keyCount(keyNum1) {
+        document.getElementById("textContentTracer").textContent = keyNum1.value.length + "/최대 2000자"; }
+
+    $(document).ready(function() {
+        function SummernoteInput(element, placeholder, max, callbackMax) {
+            $(element).summernote({
+                toolbar: [
+                    ['style', ['style', 'bold', 'italic', 'underline']],['para', ['paragraph']]
+                ],
+                placeholder,
+                height:300,
+                width:600,
+                dialogsInBody: true,
+                lang: 'ko-KR',
+                callbacks: {
+                    onKeydown: function(e) {
+                        var t = e.currentTarget.innerText;
+                        if (t.length >= max) {
+                            //delete key
+                            if (e.keyCode != 8)
+                                e.preventDefault();
+                            // add other keys ...
+                        }
+                    },
+                    onKeyup: function(e) {
+                        var t = e.currentTarget.innerText;
+                        if (typeof callbackMax == 'function') {
+                            callbackMax(max - t.length);
+                        }
+                    },
+                    onPaste: function(e) {
+                        var t = e.currentTarget.innerText;
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        var all = t + bufferText;
+                        document.execCommand('insertText', false, all.trim().substring(0, 2000));
+                        if (typeof callbackMax == 'function') {
+                            callbackMax(max - t.length);
+                        }
+                    }
+                }
+            });
+        }// SUMMERNOTE
+        $(function(){
+            SummernoteInput('#textContent', '', 2000, function(max) {
+                $('#textContentTracer').text(max+'자')
+            });
+        });
+    });
+</script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer::footerFragment"/>
+</body>
+</html>
