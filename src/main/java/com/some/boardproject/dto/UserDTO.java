@@ -34,6 +34,8 @@ public class UserDTO {
     @NotBlank(message = "email은 필수 입력사항입니다.") // 빈문자열 확인
     @Email(message = "이메일 형식이 아닙니다.")
     private String userEmail;
+
+    private String userTel;
     
     private String userGender;
 }

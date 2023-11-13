@@ -11,8 +11,8 @@ let loginObject = {
         alert("로그인 요청!!!");
 
         let user = {
-            id: $("#id").val(),
-            password: $("#password").val()
+            userId: $("#userId").val(),
+            userPw: $("#userPw").val()
         }
         console.log(user);
         $.ajax({

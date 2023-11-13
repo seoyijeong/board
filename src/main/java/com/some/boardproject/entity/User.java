@@ -21,14 +21,14 @@ import java.util.UUID;
 public class User {
 
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String userId;
 
     //primarykey는 nullable,length지정 안해줌
     @Id
     //null값이 들어올때 자동 increment해줌
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userNo;
+    private Long userNo;
 
 
     @Column(nullable = false, length = 50)

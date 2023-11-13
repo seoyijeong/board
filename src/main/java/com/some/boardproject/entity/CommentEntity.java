@@ -1,7 +1,8 @@
 package com.some.boardproject.entity;
 
 
-import com.some.boardproject.dto.CommentDTO;
+//import com.some.boardproject.dto.CommentDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "commnet_table")
+@Table(name = "comment_table")
 @NoArgsConstructor
 public class CommentEntity extends BaseEntity {
     @Id
@@ -25,30 +26,29 @@ public class CommentEntity extends BaseEntity {
 
     /* Board:Comment = 1:N */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id")
+    @JoinColumn(name = "board_num")
     private Board boardEntity;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "parent_id")
+//    private CommentEntity parent;
+//
+//    @OneToMany(mappedBy = "parent", orphanRemoval = true)
+//    private List<CommentEntity> children = new ArrayList<>();
+
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private CommentEntity parent;
-
-    @OneToMany(mappedBy = "parent", orphanRemoval = true)
-    private List<CommentEntity> children = new ArrayList<>();
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_no")
     private User user;
 
 
 
 
 //    @Builder
-//    public CommentEntity(Long id, String commentWriter, String commentContents, BoardEntity boardEntity){
-//        this.id = id;
-//        this.commentWriter = commentWriter;
+//    public CommentEntity(Long commentId, String commentContents, Board board){
+//        this.commentId = commentId;
 //        this.commentContents = commentContents;
-//        this.boardEntity = boardEntity;
+//        this.boardEntity = board;
 //    }
 //
 //    public CommentDTO toCommentDTO(){

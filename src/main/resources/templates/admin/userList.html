@@ -9,21 +9,21 @@
         <thead class='table-dark'>
         <tr>
             <th>아이디</th>
-            <th>비밀번호</th>
             <th>이름</th>
             <th>이메일</th>
+            <th>전화번호</th>
             <th>생성일자</th>
             <th>삭제</th>
         </tr>
         </thead>
         <tbody>
             <tr th:each="userList: ${userList}">
-                <td th:text="${userList.id}"></td>
-                <td th:text="${userList.password}"><a href=""></a></td>
-                <td th:text="${userList.username}"></td>
-                <td th:text="${userList.email}"></td>
+                <td th:text="${userList.userId}"></td>
+                <td th:text="${userList.userName}"><a href=""></a></td>
+                <td th:text="${userList.userEmail}"></td>
+                <td th:text="${userList.userTel}"></td>
                 <td th:text="${userList.createDate}"></td>
-                <td ><a th:href="|delete/${userList.id}|" class='btn btn-danger btn-sm'>삭제</a></td>
+                <td ><a th:href="|delete/${userList.userNo}|" class='btn btn-danger btn-sm'>삭제</a></td>
             </tr>
         </tbody>
     </table>

@@ -11,6 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,8 +24,9 @@ public class CommentDTO {
     private LocalDateTime commentUpdatedTime;
     private Board boardEntity;
     private Long boardId;
-    private String userId;
-    private int parent;
+    private Long userNo;
+    private CommentEntity parent;
+    private List<CommentEntity> children;
 
 //    @Builder
 //    public CommentDTO(Long id, String commentWriter, String commentContents, CommentEntity commentEntity){
@@ -44,7 +46,7 @@ public class CommentDTO {
 //                .build();
 //    }
 
-    public static CommentDTO toCommentDTO(CommentEntity commentEntity, Long boardId) {
+    public static CommentDTO toCommentDTO(CommentEntity commentEntity, Long boardId, Long userNo) {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setCommentId(commentEntity.getCommentId());
         commentDTO.setCommentContents(commentEntity.getCommentContents());
@@ -52,7 +54,8 @@ public class CommentDTO {
         commentDTO.setCommentUpdatedTime(commentEntity.getUpdatedTime());
 //        commentDTO.setBoardId(commentEntity.getBoardEntity().getId()); // 이 경우 Service 메소드에 @Transactional
         commentDTO.setBoardId(boardId);
-        commentDTO.setUserId(commentEntity.getUser().getId());
+//        commentDTO.setUserNo(userNo);
+        commentDTO.setUserNo(commentEntity.getUser().getUserNo());
         return commentDTO;
     }
 

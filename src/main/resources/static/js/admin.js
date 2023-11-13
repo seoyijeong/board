@@ -11,10 +11,12 @@ let userObject = {
         alert("회원 가입 요청!!!");
 
         let user = {
-            id: $("#id").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-            email: $("#email").val()
+            userId: $("#userId").val(),
+            userName: $("#userName").val(),
+            userPw: $("#userPw").val(),
+            userEmail: $("#userEmail").val(),
+            userGender: $("#userGender").val(),
+            userTel: $("#userTel").val()
         }
 
         $.ajax({

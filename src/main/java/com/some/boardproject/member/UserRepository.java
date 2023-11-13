@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     // 엔티티명은 생략가능 : findByUsername
 
     // SELECT * FROM users WHERE username = ?1;
-    Optional<User> findById(String id);
+    Optional<User> findByUserId(String id);
 
     // admin 제외 user만
     @Query("SELECT u FROM User u WHERE u.role = 'USER'")
