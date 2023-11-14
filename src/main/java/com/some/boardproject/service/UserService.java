@@ -17,7 +17,7 @@ public class UserService {
     public User getUser(String id){
 
         // 검색결과가 없으면 빈 객체를 리턴한다.
-        User findUser = userRepository.findById(id).orElseGet(()->{
+        User findUser = userRepository.findByUserId(id).orElseGet(()->{
             System.out.println("id = " + id);
             return new User();
         });

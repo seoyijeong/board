@@ -11,10 +11,12 @@ let userObject = {
         alert("회원 가입 요청!!!");
 
         let user = {
-            id: $("#id").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-            email: $("#email").val()
+            userId: $("#userId").val(),
+            userName: $("#userName").val(),
+            userPw: $("#userPw").val(),
+            userEmail: $("#userEmail").val(),
+            userGender: $("#userGender").val(),
+            userTel: $("#userTel").val()
         }
 
         $.ajax({
@@ -23,7 +25,7 @@ let userObject = {
            data:JSON.stringify(user),
            contentType: "application/json; charset=utf-8"
         }).done(function(response){
-//            console.log(response);
+           console.log(response);
             // location = "/";
 
             // validation 후
@@ -35,10 +37,10 @@ let userObject = {
             }else{
             let warn = "";
             let errors = response["data"]; // 리턴된 Map 데이터
-            if(errors.id != null) warn = warn + errors.id + "\n";
-            if(errors.username != null) warn = warn + errors.username + "\n";
-            if(errors.password != null) warn = warn + errors.password + "\n";
-            if(errors.email != null) warn = warn + errors.email + "\n";
+            if(errors.userId != null) warn = warn + errors.userId + "\n";
+            if(errors.userName != null) warn = warn + errors.userName + "\n";
+            if(errors.userPw != null) warn = warn + errors.userPw + "\n";
+            if(errors.userEmail != null) warn = warn + errors.userEmail + "\n";
             else warn = warn + errors + "\n";
             alert(warn);
             }
